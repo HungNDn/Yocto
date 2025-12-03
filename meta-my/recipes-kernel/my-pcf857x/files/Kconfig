@@ -1,0 +1,5 @@
+config MY_PCF857X
+    tristate "My PCF857x driver"
+    default m
+    help
+      Enable support for My PCF857x GPIO expander driver.

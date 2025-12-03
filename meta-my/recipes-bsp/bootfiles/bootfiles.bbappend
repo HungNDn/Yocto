@@ -1,0 +1,1 @@
+COMPATIBLE_MACHINE:rasp3-64-custom = "rasp3-64-custom"

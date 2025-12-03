@@ -1,0 +1,25 @@
+From 9b3daca61d8da8816ebe602f4907b1fc94f30476 Mon Sep 17 00:00:00 2001
+From: Nghiem Dinh Hung <hung.nghiem-dinh@banvien.com.vn>
+Date: Thu, 31 Jul 2025 16:52:08 +0700
+Subject: [PATCH] dts-Add-PCF8574-device-to-I2C1-on-Raspberry-Pi-3B
+
+---
+ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts b/arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
+index 508cb949ac24..6e108aa4e4f6 100644
+--- a/arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
++++ b/arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
+@@ -144,7 +144,7 @@
+ 	pcf8574@20 {
+ 		compatible = "pcf8574";
+ 		reg = <0x20>;
+-		interrupts = <17>; /* hoặc đổi GPIO thật nếu biết */
++		interrupts = <26 IRQ_TYPE_LEVEL_LOW>; /* hoặc đổi GPIO thật nếu biết */
+ 		interrupt-parent = <&gpio>;
+ 		status = "okay";
+ 	};
+-- 
+2.25.1
+

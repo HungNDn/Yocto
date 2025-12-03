@@ -1,0 +1,35 @@
+From 91bc0eb10d09331f95e9f2e87a49025a45d28c7a Mon Sep 17 00:00:00 2001
+From: Nghiem Dinh Hung <hung.nghiem-dinh@banvien.com.vn>
+Date: Thu, 31 Jul 2025 11:42:02 +0700
+Subject: [PATCH] dts: Add PCF8574 device to I2C1 on Raspberry Pi 3B+
+
+---
+ arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts b/arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
+index 4e4e47100831..508cb949ac24 100644
+--- a/arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
++++ b/arch/arm/boot/dts/bcm2710-rpi-3-b-plus.dts
+@@ -136,6 +136,18 @@
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&i2c1_pins>;
+ 	clock-frequency = <100000>;
++
++	status = "okay";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	pcf8574@20 {
++		compatible = "pcf8574";
++		reg = <0x20>;
++		interrupts = <17>; /* hoặc đổi GPIO thật nếu biết */
++		interrupt-parent = <&gpio>;
++		status = "okay";
++	};
+ };
+ 
+ &i2c2 {
+-- 
+2.25.1
+
