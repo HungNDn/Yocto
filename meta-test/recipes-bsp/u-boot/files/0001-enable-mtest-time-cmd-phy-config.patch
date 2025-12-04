@@ -1,0 +1,27 @@
+From 358741d34ce4b16fb56b5c4edbadc2ec91433960 Mon Sep 17 00:00:00 2001
+From: Hung Nghiem <hung.nghiem-dinh@banvien.com.vn>
+Date: Fri, 17 Oct 2025 15:30:48 +0700
+Subject: [PATCH] enable mtest, time cmd, phy config
+
+---
+ include/configs/rcar-gen3-common.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/include/configs/rcar-gen3-common.h b/include/configs/rcar-gen3-common.h
+index 21b8f858cc..5a6aa457e6 100644
+--- a/include/configs/rcar-gen3-common.h
++++ b/include/configs/rcar-gen3-common.h
+@@ -82,4 +82,10 @@
+ #define CONFIG_SH_SCIF_CLK_FREQ		65000000
+ #endif
+ 
++#define CONFIG_CMD_MEMTEST																													
++#define CONFIG_SYS_MEMTEST_START       CONFIG_SYS_SDRAM_BASE																													
++#define CONFIG_SYS_MEMTEST_END         (CONFIG_SYS_SDRAM_BASE + CONFIG_SYS_SDRAM_SIZE)																													
++#define CONFIG_CMD_TIME		
++#define CONFIG_PHY_FIXED																											
++																																																											
+ #endif	/* __RCAR_GEN3_COMMON_H */
+-- 
+2.34.1
+

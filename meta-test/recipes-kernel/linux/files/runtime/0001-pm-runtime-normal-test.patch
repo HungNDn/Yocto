@@ -1,0 +1,102 @@
+From 55e5be1ca6bf25c52f6cfe2d3b78493d5ebad32a Mon Sep 17 00:00:00 2001
+From: Hung Nghiem <hung.nghiem-dinh@banvien.com.vn>
+Date: Wed, 15 Oct 2025 16:35:08 +0700
+Subject: [PATCH] pm runtime normal test
+
+---
+ arch/arm64/boot/dts/renesas/r8a77961.dtsi     |  1 +
+ .../boot/dts/renesas/sysc-test-r8a77961.dtsi  | 32 +++++++++++++++++++
+ drivers/clk/renesas/r8a7796-cpg-mssr.c        |  2 ++
+ drivers/soc/renesas/rcar-sysc.c               |  4 +--
+ 4 files changed, 37 insertions(+), 2 deletions(-)
+ create mode 100644 arch/arm64/boot/dts/renesas/sysc-test-r8a77961.dtsi
+
+diff --git a/arch/arm64/boot/dts/renesas/r8a77961.dtsi b/arch/arm64/boot/dts/renesas/r8a77961.dtsi
+index 5b939f89164d..040e2b845b32 100644
+--- a/arch/arm64/boot/dts/renesas/r8a77961.dtsi
++++ b/arch/arm64/boot/dts/renesas/r8a77961.dtsi
+@@ -2941,6 +2941,7 @@ gsx: gsx@fd000000 {
+ 					      <&gsx_opp6>, <&gsx_opp7>;
+ 			power-domains = <&sysc R8A77961_PD_3DG_B>;
+ 			resets = <&cpg 112>;
++			status = "disabled";
+ 		};
+ 
+ 		pciec0: pcie@fe000000 {
+diff --git a/arch/arm64/boot/dts/renesas/sysc-test-r8a77961.dtsi b/arch/arm64/boot/dts/renesas/sysc-test-r8a77961.dtsi
+new file mode 100644
+index 000000000000..43605603e151
+--- /dev/null
++++ b/arch/arm64/boot/dts/renesas/sysc-test-r8a77961.dtsi
+@@ -0,0 +1,32 @@
++/ {
++	sysc_tst_3dga: tst_3dg-a {
++		compatible = "renesas,rcar-sysc-test";
++		clocks = <&cpg CPG_MOD 108>;
++		power-domains = <&sysc R8A77961_PD_3DG_A>;
++	};
++	sysc_tst_3dgb: tst_3dg-b {
++		compatible = "renesas,rcar-sysc-test";
++		clocks = <&cpg CPG_MOD 108>;
++		power-domains = <&sysc R8A77961_PD_3DG_B>;
++	};
++	sysc_tst_a3ir: tst_a3ir {
++		compatible = "renesas,rcar-sysc-test";
++		clocks = <&cpg CPG_MOD 108>;
++		power-domains = <&sysc R8A77961_PD_A3IR>;
++	};
++	sysc_tst_a2vc0: tst_a2vc0 {
++		compatible = "renesas,rcar-sysc-test";
++		clocks = <&cpg CPG_MOD 108>;
++		power-domains = <&sysc R8A77961_PD_A2VC0>;
++	};
++	sysc_tst_a2vc1: tst_a2vc1 {
++		compatible = "renesas,rcar-sysc-test";
++		clocks = <&cpg CPG_MOD 108>;
++		power-domains = <&sysc R8A77961_PD_A2VC1>;
++	};
++	sysc_tst_a3vc: tst_a3vc {
++		compatible = "renesas,rcar-sysc-test";
++		clocks = <&cpg CPG_MOD 108>;
++		power-domains = <&sysc R8A77961_PD_A3VC>;
++	};
++};
+\ No newline at end of file
+diff --git a/drivers/clk/renesas/r8a7796-cpg-mssr.c b/drivers/clk/renesas/r8a7796-cpg-mssr.c
+index f3f3e918d022..ddd4ebf754f9 100644
+--- a/drivers/clk/renesas/r8a7796-cpg-mssr.c
++++ b/drivers/clk/renesas/r8a7796-cpg-mssr.c
+@@ -121,6 +121,8 @@ static const struct cpg_core_clk r8a7796_core_clks[] __initconst = {
+ };
+ 
+ static struct mssr_mod_clk r8a7796_mod_clks[] __initdata = {
++	DEF_MOD("tsif1",                 107,   R8A7796_CLK_S3D2),
++	DEF_MOD("tsif0",                 108,   R8A7796_CLK_S3D2),
+ 	DEF_MOD("rt-dmac0",		  21,	R8A7796_CLK_S0D3),
+ 	DEF_MOD("3dge",			 112,	R8A7796_CLK_ZG),
+ 	DEF_MOD("fdp1-0",		 119,	R8A7796_CLK_S0D1),
+diff --git a/drivers/soc/renesas/rcar-sysc.c b/drivers/soc/renesas/rcar-sysc.c
+index 8bfe4490333d..9f5fa0326dcc 100644
+--- a/drivers/soc/renesas/rcar-sysc.c
++++ b/drivers/soc/renesas/rcar-sysc.c
+@@ -380,7 +380,7 @@ struct rcar_sysc_ch {
+ 
+ static
+ const struct soc_device_attribute rcar_sysc_quirks_match[] __initconst = {
+-	{
++	/* {
+ 		.soc_id = "r8a7795", .revision = "ES2.0",
+ 		.data = (void *)(BIT(R8A7795_PD_A3VP) | BIT(R8A7795_PD_CR7)
+ 			| BIT(R8A7795_PD_A3VC) | BIT(R8A7795_PD_A2VC0)
+@@ -405,7 +405,7 @@ const struct soc_device_attribute rcar_sysc_quirks_match[] __initconst = {
+ 			| BIT(R8A7796_PD_A2VC0) | BIT(R8A7796_PD_A2VC1)
+ 			| BIT(R8A7796_PD_A3IR) | BIT(R8A7796_PD_3DG_A)
+ 			| BIT(R8A7796_PD_3DG_B)),
+-	},
++	}, */
+ 	{
+ 		.soc_id = "r8a77961", .revision = "ES3.0",
+ 		.data = (void *)(BIT(R8A7796_PD_A3VC)),
+-- 
+2.34.1
+

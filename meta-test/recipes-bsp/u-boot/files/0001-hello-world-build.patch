@@ -1,0 +1,24 @@
+From 80a97d16e8975d9937cc07e1ab5b3616a6f0e270 Mon Sep 17 00:00:00 2001
+From: Hung Nghiem <hung.nghiem-dinh@banvien.com.vn>
+Date: Fri, 17 Oct 2025 13:57:29 +0700
+Subject: [PATCH] hello world build
+
+---
+ examples/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/examples/Makefile b/examples/Makefile
+index d440bc5655..738e0bb8bc 100644
+--- a/examples/Makefile
++++ b/examples/Makefile
+@@ -1,6 +1,6 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ 
+-ifndef CONFIG_SANDBOX
++ifndef CONFIG_EXAMPLES
+ 
+ ifdef FTRACE
+ subdir-ccflags-y += -finstrument-functions -DFTRACE
+-- 
+2.34.1
+

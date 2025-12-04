@@ -1,0 +1,5 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+SRC_URI += "file://0001-enable-mtest-time-cmd-phy-config.patch"
+SRC_URI += "file://u-boot-phy.cfg"
+SRC_URI += "file://u-boot-usb-ethernet-apdapter.cfg"
+# SRC_URI += "file://0001-hello-world-build.patch"

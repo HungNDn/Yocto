@@ -1,0 +1,25 @@
+From 8e19c958a055c4b79eda03afd24e5a2cdfa28d21 Mon Sep 17 00:00:00 2001
+From: Hung Nghiem <hung.nghiem-dinh@banvien.com.vn>
+Date: Wed, 17 Sep 2025 04:55:08 +0700
+Subject: [PATCH] CONFIG_VIDEO_RCAR_VIN_DEBUG
+
+---
+ drivers/media/platform/rcar-vin/rcar-dma.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/media/platform/rcar-vin/rcar-dma.c b/drivers/media/platform/rcar-vin/rcar-dma.c
+index 0afb5a10c278..e56e887e39f2 100644
+--- a/drivers/media/platform/rcar-vin/rcar-dma.c
++++ b/drivers/media/platform/rcar-vin/rcar-dma.c
+@@ -1170,7 +1170,7 @@ static irqreturn_t rvin_irq(int irq, void *data)
+ 	handled = 1;
+ 
+ 	/* overflow occurs */
+-	if (vin_debug && (int_status & VNINTS_FOS)) {
++	if (vin_debug) {
+ 		VIN_IRQ_DEBUG("overflow occurrs num[%d] at VIN (%s)\n",
+ 			      ++overflow_video[vin->id],
+ 			      dev_name(vin->v4l2_dev.dev));
+-- 
+2.34.1
+
